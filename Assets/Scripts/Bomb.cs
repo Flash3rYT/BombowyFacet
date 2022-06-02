@@ -28,16 +28,16 @@ public class Bomb : MonoBehaviour
     void Update()
     {
         countdown -= Time.deltaTime;
-        if (countdown <= 2f)
-        {
+        
+        
             // Debug.Log("1 sekunda!");
             //rend.sharedMaterial = material[0];
             //myRenderer.material.color = Color.red;
-            rend = transform.GetChild(0).GetComponent<Renderer>();
-            int r = Mathf.FloorToInt(100 * (2f - countdown) / 2);
-            // Debug.Log(r);
+            // rend = transform.GetChild(0).GetComponent<Renderer>();
+            // Debug.Log(rend.material);
+            float r = (3f - countdown) / 3f;
             rend.material.SetColor("_Color", new Color(r, 0, 0));
-        }
+        
 
         if (countdown <= 0f && !hasExploded)
         {
