@@ -6,7 +6,8 @@ public class Destructable : MonoBehaviour
 {
     public GameObject explosionEffect;
     public GameObject powerUpSpawn;
-    public bool isPowerUp = false;
+    public GameObject doorObject;
+    public bool doorSpawn = false;
 
     // Start is called before the first frame update
     public void Destroy()
@@ -17,11 +18,19 @@ public class Destructable : MonoBehaviour
         Instantiate(explosionEffect, transform.position, transform.rotation);
         Destroy(this.gameObject);
 
-         if (isPowerUp)
-         {
-             Instantiate(powerUpSpawn, transform.position, transform.rotation);
+        
+        if (doorSpawn)
+        {
+            Vector3 v3 = new Vector3(transform.position.x, 0, transform.position.z);
+            Instantiate(doorObject, v3, transform.rotation);
+            return;
+        }
 
-         }
+        if (Random.Range(0, 100) < 10)
+        {
+            Instantiate(powerUpSpawn, transform.position, transform.rotation);
+        }
+
 
     }
 }
