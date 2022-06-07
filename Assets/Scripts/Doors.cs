@@ -11,9 +11,10 @@ public class Doors : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             Debug.Log(maybeLevelGenerator);
-            LevelGenerator levelGenerator = maybeLevelGenerator.GetComponent<LevelGenerator>();
+            LevelGenerator levelGenerator = maybeLevelGenerator.GetComponent<LevelGenerator>();            
             levelGenerator.GenerateLevel();
             Debug.Log("Nastêpny poziom!");
+            Destroy(this.gameObject);
         }
     }
 }

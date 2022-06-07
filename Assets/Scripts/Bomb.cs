@@ -59,9 +59,20 @@ public class Bomb : MonoBehaviour
                 if (Physics.Raycast(transform.position, direction, out hit))
                 {                                        
                     if (hit.transform.gameObject == dest.gameObject) dest.Destroy();
-
                 }
             }
+
+            PlayerHp playerHp;
+            if (nearbyObject.TryGetComponent<PlayerHp>(out playerHp)) {
+                Debug.Log("Player checking");
+                Vector3 direction = (playerHp.transform.position - transform.position).normalized;
+                RaycastHit hit;
+                if (Physics.Raycast(transform.position, direction, out hit))
+                {
+                    if (Vector3.Distance(hit.point, playerHp.transform.position) < 0.5f) playerHp.TakeDamage(0.5f);
+                }
+            }
+
         }
 
         Destroy(gameObject);

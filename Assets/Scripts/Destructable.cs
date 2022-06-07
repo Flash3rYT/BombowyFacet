@@ -26,7 +26,7 @@ public class Destructable : MonoBehaviour
             return;
         }
 
-        if (Random.Range(0, 100) < 10)
+        if (Random.Range(0, 100) < 100)
         {
             Instantiate(powerUpSpawn, transform.position, transform.rotation);
         }
