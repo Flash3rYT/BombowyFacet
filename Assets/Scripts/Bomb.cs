@@ -13,6 +13,7 @@ public class Bomb : MonoBehaviour
 
     float countdown;
     bool hasExploded = false;
+    public bool isTrap = false;
 
 
     // Start is called before the first frame update
@@ -30,9 +31,11 @@ public class Bomb : MonoBehaviour
         countdown -= Time.deltaTime;
                 
         float r = (3f - countdown) / 3f;
-
-        rend.material.SetColor("_Color", new Color(r, 0, 0));
-        
+        if (isTrap){
+            rend.material.SetColor("_Color", new Color(0, 0, r));
+        }else {
+            rend.material.SetColor("_Color", new Color(r, 0, 0));
+        }
 
         if (countdown <= 0f && !hasExploded)
         {
@@ -43,6 +46,9 @@ public class Bomb : MonoBehaviour
 
     void Explode()
     {
+        if (isTrap) {
+            Debug.Log("wybucha trap");
+        }
         BombSpawner.spawnedBombs--;
 
         Instantiate(explosionEffect, transform.position, transform.rotation);
@@ -51,16 +57,20 @@ public class Bomb : MonoBehaviour
 
         foreach (Collider nearbyObject in colliders)
         {
-            Destructable dest;
-            if (nearbyObject.TryGetComponent(out dest))
+            if (!isTrap)
             {
-                Vector3 direction = (dest.transform.position - transform.position).normalized;
-                RaycastHit hit;
-                if (Physics.Raycast(transform.position, direction, out hit))
-                {                                        
-                    if (hit.transform.gameObject == dest.gameObject) dest.Destroy();
+                Destructable dest;
+                if (nearbyObject.TryGetComponent(out dest))
+                {
+                    Vector3 direction = (dest.transform.position - transform.position).normalized;
+                    RaycastHit hit;
+                        if (Physics.Raycast(transform.position, direction, out hit))
+                        {                                        
+                        if (hit.transform.gameObject == dest.gameObject) dest.Destroy();
+                        }
                 }
             }
+            
 
             PlayerHp playerHp;
             if (nearbyObject.TryGetComponent<PlayerHp>(out playerHp)) {

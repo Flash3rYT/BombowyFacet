@@ -7,6 +7,7 @@ public class Destructable : MonoBehaviour
     public GameObject explosionEffect;
     public GameObject powerUpSpawn;
     public GameObject doorObject;
+    public GameObject bombSpawn;
     public bool doorSpawn = false;
 
     // Start is called before the first frame update
@@ -26,11 +27,18 @@ public class Destructable : MonoBehaviour
             return;
         }
 
-        if (Random.Range(0, 100) < 100)
+        if (Random.Range(0, 100) < 10)
         {
             Instantiate(powerUpSpawn, transform.position, transform.rotation);
+            return;
         }
-
+        if (Random.Range(0,100) < 15)
+        {
+            GameObject bombTrap = Instantiate(bombSpawn, transform.position, transform.rotation);
+            Bomb bombComponent = bombTrap.GetComponent<Bomb>();
+            bombComponent.isTrap = true;
+            return;
+        }
 
     }
 }

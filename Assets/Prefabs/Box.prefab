@@ -113,4 +113,5 @@ MonoBehaviour:
   explosionEffect: {fileID: 2267048529668342328, guid: e0f572a54962d1f41a6d9d63a8675bac, type: 3}
   powerUpSpawn: {fileID: 4627064242351005901, guid: 56d02eee67c57c0428eddfc6ec68ac4d, type: 3}
   doorObject: {fileID: 13718708841368756, guid: 73976e410e7ef294f97c0d162066abff, type: 3}
+  bombSpawn: {fileID: 3007974088084203381, guid: 24a31f62b40cbaa4ca9eca0cd63ed489, type: 3}
   doorSpawn: 0
